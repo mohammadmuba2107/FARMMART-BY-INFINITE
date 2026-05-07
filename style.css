@@ -444,3 +444,43 @@ footer{
 
   box-shadow:0 5px 15px rgba(0,0,0,0.1);
 }
+/* PREMIUM FEATURES */
+
+.premium-features{
+
+padding:60px 20px;
+
+background:white;
+
+text-align:center;
+}
+
+.feature-grid{
+
+display:grid;
+
+grid-template-columns:
+repeat(auto-fit,minmax(250px,1fr));
+
+gap:25px;
+
+margin-top:40px;
+}
+
+.feature-card{
+
+background:#f5fff5;
+
+padding:30px;
+
+border-radius:20px;
+
+box-shadow:0 5px 15px rgba(0,0,0,0.1);
+
+transition:0.3s;
+}
+
+.feature-card:hover{
+
+transform:scale(1.05);
+}
