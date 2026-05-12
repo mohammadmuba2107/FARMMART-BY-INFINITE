@@ -330,3 +330,37 @@ setInterval(showNotification,5000);
 // LOAD PRODUCTS
 
 loadProducts();
+// LOGIN POPUP
+
+function openLogin(){
+
+    document.getElementById(
+      "login-modal"
+    ).style.display = "flex";
+}
+
+function closeLogin(){
+
+    document.getElementById(
+      "login-modal"
+    ).style.display = "none";
+}
+
+
+// NAVIGATION
+
+function goHome(){
+
+    window.scrollTo({
+
+      top:0,
+      behavior:"smooth"
+
+    });
+}
+
+function openTracking(){
+
+    window.location.href =
+    "tracking.html";
+}
