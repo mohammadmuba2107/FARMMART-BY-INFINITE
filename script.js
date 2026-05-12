@@ -1,298 +1,192 @@
 const products = [
 
   {
-    name: "Tomatoes",
+    name: "Fresh Tomatoes",
     price: 40,
-    rating: "4.5",
-    image:
-    "https://images.unsplash.com/photo-1546094096-0df4bcaaa337?w=400"
+    quantity: "1kg"
   },
 
   {
     name: "Wheat",
     price: 30,
-    rating: "4.3",
-    image:
-    "https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?w=400"
+    quantity: "1kg"
   },
 
   {
-    name: "Vegetables",
-    price: 50,
-    rating: "4.7",
-    image:
-    "https://images.unsplash.com/photo-1542838132-92c53300491e?w=400"
+    name: "Rice",
+    price: 60,
+    quantity: "1kg"
   }
 
 ];
 
-// SELLER PRODUCTS
-
-let sellerProducts =
-
-JSON.parse(
-localStorage.getItem("sellerProducts")
-)
-
-|| [];
-
-const allProducts = [
-
-  ...products,
-
-  ...sellerProducts
-];
-
-// PRODUCT CONTAINER
-
-const productContainer =
+const productsContainer =
 document.getElementById("products");
 
-// DISPLAY PRODUCTS
 
-function displayProducts(items) {
+// LOAD PRODUCTS
 
-  productContainer.innerHTML = "";
+function loadProducts() {
 
-  items.forEach(product => {
+  productsContainer.innerHTML = "";
 
-    productContainer.innerHTML += `
+  products.forEach(product => {
 
-    <div class="card">
+    productsContainer.innerHTML += `
 
-      <img
-      src="${product.image}"
-      class="product-img">
+    <div class="product-card">
 
       <h2>${product.name}</h2>
 
-      <p>
-        ₹${product.price}/kg
-      </p>
+      <p>Price: ₹${product.price}</p>
 
-      <p>
-        ⭐ ${product.rating}
-      </p>
+      <p>Quantity: ${product.quantity}</p>
 
-      <div class="btns">
-
-        <!-- BUY -->
-
-        <button class="buy-btn">
-
-          Buy
-
-        </button>
-
-        <!-- WISHLIST -->
-
-        <button
-        onclick="addWishlist('${product.name}')"
-
-        class="buy-btn">
-
-        ❤️
-
-        </button>
-
-        <!-- CART -->
-
-        <button
-        class="cart-btn"
-
-        onclick="addToCart('${product.name}')">
-
-        🛒 Add
-
-        </button>
-
-      </div>
+      <button onclick="addToCart('${product.name}')">
+        Add To Cart
+      </button>
 
     </div>
 
     `;
+
   });
+
 }
 
-// SHOW PRODUCTS
 
-displayProducts(allProducts);
-
-// SEARCH
+// SEARCH PRODUCTS
 
 function searchProduct() {
 
-  const search =
-
-  document
-  .getElementById("search")
+  const input =
+  document.getElementById("search")
   .value
   .toLowerCase();
 
-  const filtered =
+  const cards =
+  document.querySelectorAll(".product-card");
 
-  allProducts.filter(product =>
+  let translatedInput = input;
 
-    product.name
-    .toLowerCase()
-    .includes(search)
-  );
+  // HINDI TO ENGLISH
 
-  displayProducts(filtered);
+  if(
+    input === "tamatar" ||
+    input === "टमाटर"
+  ){
+      translatedInput = "tomatoes";
+  }
+
+  if(
+    input === "gehun" ||
+    input === "गेहूं"
+  ){
+      translatedInput = "wheat";
+  }
+
+  if(
+    input === "chawal" ||
+    input === "चावल"
+  ){
+      translatedInput = "rice";
+  }
+
+  cards.forEach(card => {
+
+    const title =
+    card.querySelector("h2")
+    .innerText
+    .toLowerCase();
+
+    if(
+      title.includes(translatedInput)
+    ){
+        card.style.display = "block";
+    }
+
+    else{
+        card.style.display = "none";
+    }
+
+  });
+
 }
+
+
+// VOICE SEARCH
+
+function startVoiceSearch() {
+
+  if (
+    !('webkitSpeechRecognition' in window)
+  ) {
+
+    alert(
+      "Voice Search Not Supported In This Browser"
+    );
+
+    return;
+  }
+
+  const recognition =
+  new webkitSpeechRecognition();
+
+  recognition.lang = "hi-IN";
+
+  recognition.onresult =
+  function(event) {
+
+    const transcript =
+    event.results[0][0].transcript;
+
+    document.getElementById("search")
+    .value = transcript;
+
+    searchProduct();
+  };
+
+  recognition.start();
+
+}
+
 
 // ADD TO CART
 
-function addToCart(name){
+function addToCart(productName) {
 
-  const selectedProduct =
+  alert(productName + " Added To Cart ✅");
 
-  allProducts.find(product =>
-
-    product.name === name
-  );
-
-  let cart =
-
-  JSON.parse(
-  localStorage.getItem("cart")
-  )
-
-  || [];
-
-  cart.push(selectedProduct);
-
-  localStorage.setItem(
-    "cart",
-    JSON.stringify(cart)
-  );
-
-  showNotification(
-  name + " added to cart 🛒"
-  );
 }
 
-// WISHLIST
-
-function addWishlist(name){
-
-  showNotification(
-  name + " added to wishlist ❤️"
-  );
-}
-
-// NOTIFICATION
-
-function showNotification(message){
-
-  let note =
-  document.createElement("div");
-
-  note.innerText = message;
-
-  note.style.position = "fixed";
-
-  note.style.top = "20px";
-
-  note.style.right = "20px";
-
-  note.style.background = "green";
-
-  note.style.color = "white";
-
-  note.style.padding = "15px";
-
-  note.style.borderRadius = "10px";
-
-  note.style.zIndex = "1000";
-
-  document.body.appendChild(note);
-
-  setTimeout(()=>{
-
-    note.remove();
-
-  },2000);
-}
-
-// DARK MODE
-
-function toggleDarkMode(){
-
-  document.body
-  .classList
-  .toggle("dark-mode");
-}
 
 // LANGUAGE SWITCH
 
-function changeLanguage(lang){
+function switchLanguage() {
 
-  if(lang === "hi"){
+  const heading =
+  document.getElementById("main-heading");
 
-    document.getElementById(
-    "heroTitle"
-    ).innerHTML =
+  if(
+    heading.innerText ===
+    "Fresh Products From Farmers 🌱"
+  ){
 
-    "किसानों से ताज़ा उत्पाद 🌱";
+    heading.innerText =
+    "किसानों से ताजे उत्पाद 🌱";
 
-    document.getElementById(
-    "heroText"
-    ).innerHTML =
-
-    "आसान • तेज • सीधा";
   }
 
   else{
 
-    document.getElementById(
-    "heroTitle"
-    ).innerHTML =
-
+    heading.innerText =
     "Fresh Products From Farmers 🌱";
 
-    document.getElementById(
-    "heroText"
-    ).innerHTML =
-
-    "Easy • Fast • Direct";
   }
+
 }
-// VOICE SEARCH
 
-function startVoiceSearch(){
 
-  const recognition =
+// LOAD PRODUCTS
 
-  new webkitSpeechRecognition();
-
-  recognition.lang = "en-IN";
-
-  recognition.start();
-
-  recognition.onresult = function(event){
-
-    const text =
-
-    event.results[0][0].transcript;
-
-    document.getElementById(
-    "search"
-    ).value = text;
-
-    searchProduct();
-
-    showNotification(
-    "Voice Search: " + text
-    );
-  };
-}
-// MOBILE MENU
-
-function toggleMenu(){
-
-  document
-  .getElementById("navLinks")
-  .classList
-  .toggle("show");
-}
+loadProducts();
