@@ -3,459 +3,129 @@
 
 <head>
 
-  <meta charset="UTF-8">
+    <meta charset="UTF-8">
 
-  <meta name="viewport"
-  content="width=device-width, initial-scale=1.0">
+    <meta name="viewport"
+    content="width=device-width, initial-scale=1.0">
 
-  <title>FarmMart</title>
+    <title>FarmMart</title>
 
-  <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet"
+    href="style.css">
 
 </head>
 
 <body>
 
-<!-- TOPBAR -->
+    <!-- NAVBAR -->
 
-<div class="topbar">
+    <nav class="navbar">
 
-  <!-- LOGO -->
+        <h1>
+            🌾 FarmMart
+        </h1>
 
-  <div class="logo-area">
+        <div class="nav-links">
 
-    <img
-    src="logo.png"
-    class="logo">
+            <a href="#">Home</a>
 
-    <h2>FarmMart</h2>
+            <a href="#">Products</a>
 
-  </div>
+            <a href="#">Cart</a>
 
-  <!-- MENU BUTTON -->
+            <a href="#">Seller</a>
 
-  <div
-  class="menu-btn"
+            <a href="#">Tracking</a>
 
-  onclick="toggleMenu()">
+        </div>
 
-  ☰
+    </nav>
 
-  </div>
 
-  <!-- NAV LINKS -->
+    <!-- HERO -->
 
-  <div
-  class="nav-links"
+    <section class="hero">
 
-  id="navLinks">
+        <h1 id="main-heading">
+            Fresh Products From Farmers 🌱
+        </h1>
 
-    <a href="login.html">
-      Login
-    </a>
+        <p>
+            Direct Farmer To Customer Marketplace
+        </p>
 
-    <a href="signup.html">
-      Signup
-    </a>
+        <button onclick="switchLanguage()">
+            🌐 Hindi / English
+        </button>
 
-    <a href="seller.html">
-      Seller
-    </a>
+    </section>
 
-    <a href="cart.html">
-      🛒 Cart
-    </a>
 
-    <!-- DARK MODE -->
+    <!-- SEARCH -->
 
-    <button
-    onclick="toggleDarkMode()"
+    <div class="search-box">
 
-    class="dark-btn">
+        <input
+        type="text"
+        id="search"
+        placeholder="Search products..."
+        onkeyup="searchProduct()"
+        >
 
-    🌙
-
-    </button>
-
-    <!-- LANGUAGE -->
-
-    <select
-    onchange="changeLanguage(this.value)">
-
-      <option value="en">
-        English
-      </option>
-
-      <option value="hi">
-        हिंदी
-      </option>
-
-    </select>
-
-  </div>
-
-</div>
-
-<!-- HERO -->
-
-<div class="premium-hero">
-
-  <div>
-
-    <h1 id="heroTitle">
-
-      Empowering Farmers,
-      Connecting Customers 🌱
-
-    </h1>
-
-    <p id="heroText">
-
-      Smart Agriculture Marketplace
-      with Voice Search,
-      Live Tracking &
-      Transparent Pricing.
-
-    </p>
-
-    <button class="hero-btn">
-
-      Explore Products 🚀
-
-    </button>
-
-  </div>
-
-  <img
-  src="logo.png"
-  class="hero-logo">
-
-</div>
-
-<!-- STATS -->
-
-<div class="stats">
-
-  <div class="stat-card">
-
-    <h1>500+</h1>
-
-    <p>Farmers Connected</p>
-
-  </div>
-
-  <div class="stat-card">
-
-    <h1>1000+</h1>
-
-    <p>Orders Delivered</p>
-
-  </div>
-
-  <div class="stat-card">
-
-    <h1>50+</h1>
-
-    <p>Cities Reached</p>
-
-  </div>
-
-</div>
-
-<!-- SEARCH -->
-
-<div class="search-box">
-
-  <input
-  type="text"
-
-  id="search"
-
-  placeholder="Search products..."
-
-  onkeyup="searchProduct()">
-
-  <button
-  onclick="startVoiceSearch()"
-
-  class="cart-btn"
-
-  style="
-  margin-top:15px;
-  ">
-
-  🎤 Voice Search
-
-  </button>
-
-</div>
-
-<!-- FEATURES -->
-
-<div class="features">
-
-  <div class="feature-card">
-
-    <h2>🎤 Smart Search</h2>
-
-    <p>
-      Voice, text & image search
-      for easy product finding.
-    </p>
-
-  </div>
-
-  <div class="feature-card">
-
-    <h2>🚚 Live Tracking</h2>
-
-    <p>
-      Real-time order tracking
-      from farmer to customer.
-    </p>
-
-  </div>
-
-  <div class="feature-card">
-
-    <h2>💳 Secure Payments</h2>
-
-    <p>
-      Smooth payment process
-      with trusted gateways.
-    </p>
-
-  </div>
-
-</div>
-
-<!-- AI PRICE COMPARISON -->
-
-<div class="price-ai">
-
-  <h1>
-
-    🤖 AI Weekly Price Comparison
-
-  </h1>
-
-  <p>
-
-    Smart AI compares mandi prices,
-    nearby shops and direct farm prices.
-
-  </p>
-
-  <div class="price-grid">
-
-    <div class="price-card">
-
-      <h2>🌾 Wheat</h2>
-
-      <p>Mandi Price: ₹40/kg</p>
-
-      <p>Nearby Shops: ₹45/kg</p>
-
-      <h3>FarmMart AI Price: ₹30/kg</h3>
+        <button onclick="startVoiceSearch()">
+            🎤 Voice Search
+        </button>
 
     </div>
 
-    <div class="price-card">
 
-      <h2>🍅 Tomatoes</h2>
+    <!-- PRODUCTS -->
 
-      <p>Mandi Price: ₹60/kg</p>
-
-      <p>Nearby Shops: ₹70/kg</p>
-
-      <h3>FarmMart AI Price: ₹40/kg</h3>
+    <div id="products"
+    class="products-container">
 
     </div>
 
-  </div>
 
-</div>
+    <!-- FEATURES -->
 
-<!-- PREMIUM FEATURES -->
+    <section class="features">
 
-<section class="premium-features">
+        <div class="feature-card">
+            🤖 AI Price Comparison
+        </div>
 
-<h1>🌟 Premium Features</h1>
+        <div class="feature-card">
+            🚚 Live Order Tracking
+        </div>
 
-<div class="feature-grid">
+        <div class="feature-card">
+            🛒 Smart Cart System
+        </div>
 
-<div class="feature-card">
+        <div class="feature-card">
+            🌐 Multi Language Support
+        </div>
 
-<h2>👥 Dual Role System</h2>
+    </section>
 
-<p>
-Users can switch between
-Customer and Seller accounts
-with one click.
-</p>
 
-</div>
+    <!-- FOOTER -->
 
-<div class="feature-card">
+    <footer>
 
-<h2>🤖 AI Price Transparency</h2>
+        <h3>
+            FarmMart By Infinite 🚀
+        </h3>
 
-<p>
-AI compares mandi and local market
-prices to ensure fair pricing for farmers
-and customers.
-</p>
+        <p>
+            Hackathon Project
+        </p>
 
-</div>
+    </footer>
 
-<div class="feature-card">
 
-<h2>🎨 Customisable Storefront</h2>
-
-<p>
-Sellers can customize their shop
-banner, products, offers and branding.
-</p>
-
-</div>
-
-</div>
-
-</section>
-
-<!-- SMART TECHNOLOGY -->
-
-<section class="smart-tech">
-
-<h1>🚀 Smart Technologies Used</h1>
-
-<div class="tech-grid">
-
-<div class="tech-card">
-
-<h2>🤖 AI Pricing</h2>
-
-<p>
-AI compares market prices weekly
-to provide best farmer rates.
-</p>
-
-</div>
-
-<div class="tech-card">
-
-<h2>⛓ Blockchain</h2>
-
-<p>
-Secure and transparent payment
-verification system.
-</p>
-
-</div>
-
-<div class="tech-card">
-
-<h2>📡 IoT Farming</h2>
-
-<p>
-Smart sensors monitor crop quality,
-soil moisture and farming health.
-</p>
-
-</div>
-
-<div class="tech-card">
-
-<h2>☁ Cloud Sync</h2>
-
-<p>
-Real-time cloud storage and data sync
-for farmers and customers.
-</p>
-
-</div>
-
-<div class="tech-card">
-
-<h2>🚚 GPS Tracking</h2>
-
-<p>
-Track live delivery location and
-estimated arrival time.
-</p>
-
-</div>
-
-<div class="tech-card">
-
-<h2>🔒 Secure Payments</h2>
-
-<p>
-Safe online transactions with
-future UPI & gateway integration.
-</p>
-
-</div>
-
-</div>
-
-</section>
-
-<!-- PRODUCTS -->
-
-<h1 class="section-title">
-
-Popular Products 🌾
-
-</h1>
-
-<div
-class="container"
-id="products">
-</div>
-
-<!-- TESTIMONIALS -->
-
-<div class="testimonial-section">
-
-  <h1>
-    What Farmers Say ❤️
-  </h1>
-
-  <div class="testimonial-card">
-
-    <p>
-
-      “FarmMart helped me
-      sell directly to customers
-      and increase my profit.”
-
-    </p>
-
-    <h3>
-      - Ramesh Farmer
-    </h3>
-
-  </div>
-
-</div>
-
-<!-- FOOTER -->
-
-<footer>
-
-  <h2>FarmMart 🌱</h2>
-
-  <p>
-
-    Connecting Farmers &
-    Customers Digitally.
-
-  </p>
-
-</footer>
-
-<script src="script.js"></script>
+    <script src="script.js"></script>
 
 </body>
 </html>
