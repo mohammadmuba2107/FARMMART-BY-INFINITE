@@ -5,274 +5,1088 @@
 
     <meta charset="UTF-8">
 
-    <meta
-    name="viewport"
+    <meta name="viewport"
     content="width=device-width, initial-scale=1.0">
 
     <title>FarmMart</title>
 
-    <link
-    rel="stylesheet"
-    href="style.css">
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Arial;
+        }
+
+        body{
+            background:#f5fff5;
+        }
+
+        .navbar{
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            padding:15px 40px;
+            background:#1f7a1f;
+            color:white;
+            position:sticky;
+            top:0;
+            z-index:1000;
+        }
+
+        .logo{
+            font-size:28px;
+            font-weight:bold;
+        }
+
+        .nav-links{
+            display:flex;
+            align-items:center;
+            gap:15px;
+        }
+
+        .nav-links a,
+        .nav-links button{
+            color:white;
+            text-decoration:none;
+            border:none;
+            background:none;
+            cursor:pointer;
+            font-size:16px;
+        }
+
+        .cart-box{
+            background:white;
+            color:black;
+            padding:10px 15px;
+            border-radius:10px;
+            cursor:pointer;
+            font-weight:bold;
+        }
+
+        .hero-section{
+            text-align:center;
+            padding:80px 20px;
+            background:linear-gradient(
+            rgba(0,0,0,0.4),
+            rgba(0,0,0,0.4)),
+            url('https://images.unsplash.com/photo-1500937386664-56d1dfef3854?q=80&w=1600&auto=format&fit=crop');
+            background-size:cover;
+            color:white;
+        }
+
+        .hero-section h1{
+            font-size:50px;
+            margin-bottom:20px;
+        }
+
+        .hero-section p{
+            font-size:20px;
+            margin-bottom:30px;
+        }
+
+        .search-section{
+            display:flex;
+            justify-content:center;
+            gap:10px;
+            flex-wrap:wrap;
+        }
+
+        .search-section input{
+            width:300px;
+            padding:14px;
+            border:none;
+            border-radius:10px;
+        }
+
+        .search-section button{
+            padding:14px 20px;
+            border:none;
+            border-radius:10px;
+            background:#1f7a1f;
+            color:white;
+            cursor:pointer;
+        }
+
+        .dashboard-section{
+            padding:30px;
+            text-align:center;
+        }
+
+        .dashboard-card{
+            background:white;
+            padding:30px;
+            border-radius:20px;
+            box-shadow:0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .dashboard-buttons{
+            margin-top:20px;
+        }
+
+        .dashboard-buttons button{
+            padding:12px 18px;
+            margin:10px;
+            border:none;
+            border-radius:10px;
+            background:#1f7a1f;
+            color:white;
+            cursor:pointer;
+        }
+
+        .features{
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+            gap:20px;
+            padding:40px;
+        }
+
+        .feature-card{
+            background:white;
+            padding:25px;
+            border-radius:20px;
+            text-align:center;
+            box-shadow:0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .sell-section{
+            text-align:center;
+            padding:40px;
+        }
+
+        .sell-section button{
+            margin-top:20px;
+            padding:14px 20px;
+            border:none;
+            border-radius:10px;
+            background:#1f7a1f;
+            color:white;
+            cursor:pointer;
+        }
+
+        .main-layout{
+            padding:40px;
+        }
+
+        .ai-price-box,
+        .tracking-box{
+            background:white;
+            padding:30px;
+            border-radius:20px;
+            margin-bottom:30px;
+            box-shadow:0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .ai-price-box select,
+        .ai-price-box button{
+            margin-top:15px;
+            padding:12px;
+            border-radius:10px;
+        }
+
+        .products-container{
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+            gap:25px;
+        }
+
+        .product-card{
+            background:white;
+            border-radius:20px;
+            overflow:hidden;
+            box-shadow:0 5px 15px rgba(0,0,0,0.1);
+            text-align:center;
+            padding-bottom:20px;
+        }
+
+        .product-card img{
+            width:100%;
+            height:220px;
+            object-fit:cover;
+        }
+
+        .product-card h3{
+            margin-top:15px;
+        }
+
+        .product-card button{
+            margin-top:15px;
+            padding:12px 18px;
+            border:none;
+            border-radius:10px;
+            background:#1f7a1f;
+            color:white;
+            cursor:pointer;
+        }
+
+        .progress-bar{
+            width:100%;
+            background:#ddd;
+            height:20px;
+            border-radius:20px;
+            margin-top:20px;
+            overflow:hidden;
+        }
+
+        .progress{
+            width:100%;
+            height:100%;
+            background:green;
+            animation:progressMove 12s linear infinite;
+        }
+
+        @keyframes progressMove{
+            0%{
+                width:0%;
+            }
+
+            100%{
+                width:100%;
+            }
+        }
+
+        .payment-box{
+            text-align:center;
+            padding:40px;
+        }
+
+        .payment-box button{
+            margin-top:20px;
+            padding:14px 20px;
+            border:none;
+            border-radius:10px;
+            background:#1f7a1f;
+            color:white;
+            cursor:pointer;
+        }
+
+        .modal{
+            display:none;
+            position:fixed;
+            width:100%;
+            height:100%;
+            background:rgba(0,0,0,0.5);
+            top:0;
+            left:0;
+            justify-content:center;
+            align-items:center;
+            z-index:1000;
+        }
+
+        .modal-content{
+            background:white;
+            padding:30px;
+            width:90%;
+            max-width:400px;
+            border-radius:20px;
+            position:relative;
+        }
+
+        .modal-content input{
+            width:100%;
+            margin-top:15px;
+            padding:12px;
+        }
+
+        .modal-content button{
+            width:100%;
+            margin-top:15px;
+            padding:12px;
+            border:none;
+            border-radius:10px;
+            background:#1f7a1f;
+            color:white;
+            cursor:pointer;
+        }
+
+        .close{
+            position:absolute;
+            right:20px;
+            top:10px;
+            cursor:pointer;
+            font-size:25px;
+        }
+
+        .notification{
+            position:fixed;
+            top:20px;
+            right:20px;
+            background:#1f7a1f;
+            color:white;
+            padding:15px 20px;
+            border-radius:10px;
+            display:none;
+            z-index:2000;
+        }
+
+        .chatbot{
+            position:fixed;
+            bottom:20px;
+            right:20px;
+            background:#1f7a1f;
+            color:white;
+            padding:15px;
+            border-radius:50px;
+            cursor:pointer;
+        }
+
+        footer{
+            background:#1f7a1f;
+            color:white;
+            text-align:center;
+            padding:30px;
+            margin-top:40px;
+        }
+
+    </style>
 
 </head>
 
 <body>
 
-    <!-- NAVBAR -->
-
     <nav class="navbar">
 
         <div class="logo">
-
             🌱 FarmMart
-
         </div>
 
         <div class="nav-links">
 
-            <a href="index.html">
-                🏠 Home
+            <a href="#" id="nav-home">
+                Home
             </a>
 
-            <a href="login.html">
-                🔐 Login
+            <a href="#" id="nav-products">
+                Products
             </a>
 
-            <a href="tracking.html">
-                🚚 Tracking
+            <a href="#" id="nav-tracking">
+                Tracking
             </a>
 
-            <button onclick="switchLanguage()">
-
-                🌐 हिंदी
-
+            <button onclick="openLoginModal()">
+                Login / Signup
             </button>
 
-        </div>
+            <button onclick="switchLanguage()">
+                🌐 हिंदी
+            </button>
 
-    </nav>
+            <div class="cart-box"
+            onclick="openCart()">
 
-
-    <!-- HERO SECTION -->
-
-    <div class="hero-section">
-
-        <h1 id="main-heading">
-
-            Fresh Products From Farmers 🌱
-
-        </h1>
-
-        <p class="hero-text">
-
-            Buy fresh vegetables and grains directly from farmers at the best price.
-
-        </p>
-
-        <img
-        src="logo.png"
-        class="hero-image">
-
-    </div>
-
-
-    <!-- SEARCH -->
-
-    <div class="search-section">
-
-        <input
-        type="text"
-        id="search"
-        placeholder="Search products..."
-        onkeyup="searchProduct()">
-
-        <button onclick="startVoiceSearch()">
-
-            🎤 Voice Search
-
-        </button>
-
-    </div>
-
-
-    <!-- FEATURE CARDS -->
-
-    <div class="features">
-
-        <div class="feature-card">
-
-            🤖 AI Price Comparison
-
-        </div>
-
-        <div class="feature-card">
-
-            🚚 Live Order Tracking
-
-        </div>
-
-        <div class="feature-card">
-
-            🛒 Smart Cart System
-
-        </div>
-
-        <div class="feature-card">
-
-            🌐 Multi Language Support
-
-        </div>
-
-    </div>
-
-
-    <!-- AI PRICE -->
-
-    <div class="ai-price-box">
-
-        <h2>
-
-            🤖 AI Market Price Comparison
-
-        </h2>
-
-        <p id="ai-price-text">
-
-            Wheat market price is ₹45/kg.
-            FarmMart price is ₹30/kg.
-            You save ₹15 🎉
-
-        </p>
-
-        <button onclick="changeAIPrice()">
-
-            Show AI Comparison
-
-        </button>
-
-    </div>
-
-
-    <!-- LIVE USERS -->
-
-    <div class="live-users">
-
-        🔥 127 Users Shopping Live
-
-    </div>
-
-
-    <!-- PRODUCTS -->
-
-    <h1 class="product-heading">
-
-        🛒 Available Products
-
-    </h1>
-
-    <div
-    id="products"
-    class="products-container">
-
-    </div>
-
-
-    <!-- ORDER TRACKING -->
-
-    <div class="tracking-box">
-
-        <h2>
-
-            🚚 Live Order Tracking
-
-        </h2>
-
-        <div class="tracking-bar">
-
-            <div class="tracking-progress">
+                🛒 <span id="cart-count">0</span>
 
             </div>
 
         </div>
 
-        <p>
+    </nav>
 
-            Your order is on the way...
+    <section class="hero-section">
 
+        <h1 id="main-heading">
+            Fresh Products Directly From Farmers 🌱
+        </h1>
+
+        <p id="hero-text">
+            Buy fresh vegetables and grains directly from farmers.
         </p>
 
-    </div>
+        <div class="search-section">
 
+           <input
+type="text"
+id="search"
+placeholder="Search products here..."
+autocomplete="off"
+autocorrect="off"
+autocapitalize="off"
+spellcheck="false"
+name="searchbox"
+onkeyup="searchProducts()">
 
-    <!-- CHATBOT -->
+            <button onclick="startVoiceSearch()">
+                🎤 Voice Search
+            </button>
 
-    <div class="chatbot">
+        </div>
 
-        💬 AI Chat Support
+    </section>
 
-    </div>
+    <section class="dashboard-section">
 
+        <div class="dashboard-card">
 
-    <!-- PAYMENT -->
+            <h2 id="dashboard-title">
+                User Dashboard
+            </h2>
 
-    <div class="payment-box">
+            <p id="dashboard-text">
+                Login to access features.
+            </p>
 
-        <h2>
+            <div class="dashboard-buttons">
 
-            💳 Payment Success Demo
+                <button onclick="customerDashboard()">
+                    Customer Dashboard
+                </button>
 
+                <button onclick="sellerDashboard()">
+                    Seller Dashboard
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="features">
+
+        <div class="feature-card">
+            🤖 AI Price Comparison
+        </div>
+
+        <div class="feature-card">
+            🚚 Live Tracking
+        </div>
+
+        <div class="feature-card">
+            🛒 Smart Cart
+        </div>
+
+        <div class="feature-card">
+            🌐 Multi Language
+        </div>
+
+    </section>
+
+    <section class="main-layout">
+
+        <div class="ai-price-box">
+
+            <h2>
+                🤖 AI Market Price Comparison
+            </h2>
+
+            <select id="productSelect">
+
+                <option value="Wheat">
+                    Wheat
+                </option>
+
+                <option value="Tomato">
+                    Tomato
+                </option>
+
+                <option value="Potato">
+                    Potato
+                </option>
+
+                <option value="Rice">
+                    Rice
+                </option>
+
+            </select>
+
+            <button onclick="updateAIPrice()">
+                Show AI Comparison
+            </button>
+
+            <p id="ai-price-text">
+
+                🌾 Wheat Market Price : ₹45/kg
+
+            </p>
+
+        </div>
+
+        <h2 style="margin-bottom:20px;">
+            🛒 Available Products
         </h2>
 
-        <button onclick="showPaymentSuccess()">
+        <div class="products-container">
 
+            <div class="product-card">
+
+                <img src="https://images.unsplash.com/photo-1546094096-0df4bcaaa337?q=80&w=1200&auto=format&fit=crop">
+
+                <h3>
+                    🍅 Tomato
+                </h3>
+
+                <p>
+                    ₹40/kg
+                </p>
+
+                <button onclick="addToCart('Tomato')">
+                    Add To Cart
+                </button>
+
+            </div>
+
+            <div class="product-card">
+
+                <img src="https://images.unsplash.com/photo-1518977676601-b53f82aba655?q=80&w=1200&auto=format&fit=crop">
+
+                <h3>
+                    🥔 Potato
+                </h3>
+
+                <p>
+                    ₹30/kg
+                </p>
+
+                <button onclick="addToCart('Potato')">
+                    Add To Cart
+                </button>
+
+            </div>
+
+            <div class="product-card">
+
+                <img src="https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?q=80&w=1200&auto=format&fit=crop">
+
+                <h3>
+                    🌾 Wheat
+                </h3>
+
+                <p>
+                    ₹28/kg
+                </p>
+
+                <button onclick="addToCart('Wheat')">
+                    Add To Cart
+                </button>
+
+            </div>
+
+            <div class="product-card">
+
+                <img src="https://images.unsplash.com/photo-1586201375761-83865001e31c?q=80&w=1200&auto=format&fit=crop">
+
+                <h3>
+                    🍚 Rice
+                </h3>
+
+                <p>
+                    ₹60/kg
+                </p>
+
+                <button onclick="addToCart('Rice')">
+                    Add To Cart
+                </button>
+
+            </div>
+
+        </div>
+
+        <div class="tracking-box">
+
+            <h2 id="tracking-title">
+                🚚 Live Tracking
+            </h2>
+
+            <p id="tracking-text">
+                ✅ Order Placed
+            </p>
+
+            <div class="progress-bar">
+                <div class="progress"></div>
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="payment-box">
+
+        <h2>
+            💳 Payment Demo
+        </h2>
+
+        <button onclick="paymentSuccess()">
             Pay Now
-
         </button>
 
+    </section>
+
+    <!-- LOGIN MODAL -->
+
+    <div class="modal"
+    id="loginModal">
+
+        <div class="modal-content">
+
+            <span class="close"
+            onclick="closeLoginModal()">
+                ×
+            </span>
+
+            <h2 id="login-title">
+                Login / Signup
+            </h2>
+
+            <input
+            type="text"
+            id="username"
+            placeholder="Username">
+
+            <input
+            type="password"
+            id="password"
+            placeholder="Password">
+
+            <button onclick="customerLogin()">
+                Customer Login
+            </button>
+
+            <button onclick="sellerLogin()">
+                Seller Login
+            </button>
+
+            <button onclick="guestLogin()">
+                Continue As Guest
+            </button>
+
+        </div>
+
     </div>
 
+    <!-- CART MODAL -->
 
-    <!-- NOTIFICATION -->
+    <div class="modal"
+    id="cartModal">
 
-    <div
-    id="notification"
-    class="notification">
+        <div class="modal-content">
+
+            <span class="close"
+            onclick="closeCart()">
+                ×
+            </span>
+
+            <h2>
+                🛒 Your Cart
+            </h2>
+
+            <div id="cart-items">
+
+            </div>
+
+        </div>
 
     </div>
 
+    <div class="notification"
+    id="notification">
 
-    <!-- FOOTER -->
+    </div>
+
+    <div class="chatbot">
+        💬 AI Chat Support
+    </div>
 
     <footer>
 
-        <h2>
-
+        <h2 id="footer-title">
             Made By Team Infinite 🚀
-
         </h2>
-
-        <p>
-
-            For Query:
-            farmmartsupport@gmail.com
-
-        </p>
-
-        <p>
-
-            Contact:
-            +91 9876543210
-
-        </p>
 
     </footer>
 
+<script>
 
-    <!-- SCRIPT -->
+let cart = [];
 
-    <script src="script.js"></script>
+let currentLanguage = "english";
+
+// ADD TO CART
+
+function addToCart(product){
+
+    cart.push(product);
+
+    document.getElementById("cart-count")
+    .innerText = cart.length;
+
+    showNotification(product + " added to cart ✅");
+
+}
+
+// OPEN CART
+
+function openCart(){
+
+    let cartItems =
+    document.getElementById("cart-items");
+
+    cartItems.innerHTML = "";
+
+    if(cart.length === 0){
+
+        cartItems.innerHTML =
+        "<p>Your cart is empty</p>";
+
+    }
+
+    else{
+
+        cart.forEach(item => {
+
+            cartItems.innerHTML +=
+            `<p style="margin:10px 0;">
+                🛒 ${item}
+            </p>`;
+
+        });
+
+    }
+
+    document.getElementById("cartModal")
+    .style.display = "flex";
+
+}
+
+// CLOSE CART
+
+function closeCart(){
+
+    document.getElementById("cartModal")
+    .style.display = "none";
+
+}
+
+// NOTIFICATION
+
+function showNotification(message){
+
+    let notification =
+    document.getElementById("notification");
+
+    notification.innerText = message;
+
+    notification.style.display = "block";
+
+    setTimeout(() => {
+
+        notification.style.display = "none";
+
+    }, 2500);
+
+}
+
+// LOGIN MODAL
+
+function openLoginModal(){
+
+    document.getElementById("loginModal")
+    .style.display = "flex";
+
+}
+
+function closeLoginModal(){
+
+    document.getElementById("loginModal")
+    .style.display = "none";
+
+}
+
+// CUSTOMER LOGIN
+
+function customerLogin(){
+
+    let username =
+    document.getElementById("username").value;
+
+    let password =
+    document.getElementById("password").value;
+
+    if(username && password){
+
+        document.getElementById("dashboard-text")
+        .innerHTML = `
+        👤 Customer Dashboard Active <br><br>
+        📦 Orders : 3 <br>
+        🛒 Cart Items : ${cart.length}
+        `;
+
+        showNotification(
+        "Customer Login Successful ✅");
+
+        closeLoginModal();
+
+    }
+
+    else{
+
+        alert("Enter username & password");
+
+    }
+
+}
+
+// SELLER LOGIN
+
+function sellerLogin(){
+
+    let username =
+    document.getElementById("username").value;
+
+    let password =
+    document.getElementById("password").value;
+
+    if(username && password){
+
+        document.getElementById("dashboard-text")
+        .innerHTML = `
+        🌾 Seller Dashboard Active <br><br>
+        📦 Products Listed : 12 <br>
+        💰 Earnings : ₹25,000
+        `;
+
+        showNotification(
+        "Seller Login Successful ✅");
+
+        closeLoginModal();
+
+    }
+
+}
+
+// GUEST LOGIN
+
+function guestLogin(){
+
+    showNotification(
+    "Continuing As Guest ✅");
+
+    closeLoginModal();
+
+}
+
+// DASHBOARD BUTTONS
+
+function customerDashboard(){
+
+    alert("Customer Dashboard Opened 🚀");
+
+}
+
+function sellerDashboard(){
+
+    alert("Seller Dashboard Opened 🚀");
+
+}
+
+// SEARCH PRODUCTS
+
+function searchProducts(){
+
+    let input =
+    document.getElementById("search")
+    .value
+    .toLowerCase();
+
+    let cards =
+    document.querySelectorAll(".product-card");
+
+    cards.forEach(card => {
+
+        let text =
+        card.innerText.toLowerCase();
+
+        if(text.includes(input)){
+
+            card.style.display = "block";
+
+        }
+
+        else{
+
+            card.style.display = "none";
+
+        }
+
+    });
+
+}
+
+// VOICE SEARCH
+
+function startVoiceSearch(){
+
+    const SpeechRecognition =
+    window.SpeechRecognition ||
+    window.webkitSpeechRecognition;
+
+    if(!SpeechRecognition){
+
+        alert("Voice Search Not Supported");
+
+        return;
+
+    }
+
+    const recognition =
+    new SpeechRecognition();
+
+    recognition.lang = "en-IN";
+
+    recognition.start();
+
+    recognition.onresult = function(event){
+
+        let result =
+        event.results[0][0].transcript;
+
+        document.getElementById("search")
+        .value = result;
+
+        searchProducts();
+
+    };
+
+}
+
+// TRACKING
+
+let trackingSteps = [
+
+    "✅ Order Placed",
+
+    "📦 Product Packed",
+
+    "🚚 Shipped From Warehouse",
+
+    "🛣️ Out For Delivery",
+
+    "🏠 Delivered Successfully"
+
+];
+
+let step = 0;
+
+setInterval(() => {
+
+    document.getElementById("tracking-text")
+    .innerText =
+    trackingSteps[step];
+
+    step++;
+
+    if(step >= trackingSteps.length){
+
+        step = 0;
+
+    }
+
+}, 3000);
+
+// AI PRICE
+
+function updateAIPrice(){
+
+    let product =
+    document.getElementById("productSelect")
+    .value;
+
+    let text =
+    document.getElementById("ai-price-text");
+
+    if(product === "Wheat"){
+
+        text.innerHTML =
+        "🌾 Wheat Market Price : ₹45/kg <br><br> 🌱 FarmMart Price : ₹30/kg <br><br> 🎉 You Save ₹15";
+
+    }
+
+    else if(product === "Tomato"){
+
+        text.innerHTML =
+        "🍅 Tomato Market Price : ₹60/kg <br><br> 🌱 FarmMart Price : ₹40/kg <br><br> 🎉 You Save ₹20";
+
+    }
+
+    else if(product === "Potato"){
+
+        text.innerHTML =
+        "🥔 Potato Market Price : ₹50/kg <br><br> 🌱 FarmMart Price : ₹30/kg <br><br> 🎉 You Save ₹20";
+
+    }
+
+    else if(product === "Rice"){
+
+        text.innerHTML =
+        "🍚 Rice Market Price : ₹80/kg <br><br> 🌱 FarmMart Price : ₹60/kg <br><br> 🎉 You Save ₹20";
+
+    }
+
+}
+
+// PAYMENT
+
+function paymentSuccess(){
+
+    showNotification(
+    "Payment Successful ✅");
+
+}
+
+// LANGUAGE SWITCH
+
+function switchLanguage(){
+
+    if(currentLanguage === "english"){
+
+        currentLanguage = "hindi";
+
+        document.getElementById("nav-home")
+        .innerText = "होम";
+
+        document.getElementById("nav-products")
+        .innerText = "उत्पाद";
+
+        document.getElementById("nav-tracking")
+        .innerText = "ट्रैकिंग";
+
+        document.getElementById("main-heading")
+        .innerText =
+        "किसानों से सीधे ताज़ा उत्पाद 🌱";
+
+        document.getElementById("hero-text")
+        .innerText =
+        "ताज़ी सब्जियां और अनाज सीधे किसानों से खरीदें";
+
+        document.getElementById("dashboard-title")
+        .innerText =
+        "यूज़र डैशबोर्ड";
+
+        document.getElementById("footer-title")
+        .innerText =
+        "टीम इनफिनिट द्वारा निर्मित 🚀";
+
+    }
+
+    else{
+
+        location.reload();
+
+    }
+
+}
+
+// CHATBOT
+
+document.querySelector(".chatbot")
+.addEventListener("click", () => {
+
+    alert("AI Chat Support Coming Soon 🚀");
+
+});
+
+</script>
 
 </body>
-
 </html>
